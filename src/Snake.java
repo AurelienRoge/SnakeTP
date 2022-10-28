@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Snake {
-    ArrayList<SnakeElement> snakeList = new ArrayList<SnakeElement>();//Création du tableau contenant le serpent
+    ArrayList<SnakeElement> snakeList = new ArrayList<>();//Création du tableau contenant le serpent
     String orientation = "W"; // North East South West
     int sizeToIncreaseLeft = 0;
     int mapSize;
@@ -70,5 +70,14 @@ public class Snake {
 
     public void increaseSize(int value) {
         sizeToIncreaseLeft += value;
+    }
+
+    //Retourne les positions de toutes les cases du serpent
+    public int[] getAllPositions(){
+        int[] positions = new int[snakeList.size()];
+        for(int i = 0; i < snakeList.size(); i++){
+            positions[i] = snakeList.get(i).getPosition();
+        }
+        return positions;
     }
 }

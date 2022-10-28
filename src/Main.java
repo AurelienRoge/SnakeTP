@@ -1,16 +1,17 @@
-import java.util.ArrayList;
-
 public class Main {
 
     public static void main(String[] args) {
 
-        Snake snake = new Snake(10);
-        snake.displaySnakePositions();
-        snake.manageSnakePositionAndSize();
-        snake.displaySnakePositions();
-        snake.increaseSize(1);
-        snake.manageSnakePositionAndSize();
-        snake.displaySnakePositions();
+        //Des test
+        GameManager game = new GameManager(10);
+        game.getSnake().displaySnakePositions();
+        game.updateAndDisplayMap();
+        game.getSnake().manageSnakePositionAndSize();
+        game.getSnake().displaySnakePositions();
+        game.getSnake().increaseSize(1);
+        game.getSnake().manageSnakePositionAndSize();
+        game.getSnake().displaySnakePositions();
+        game.updateAndDisplayMap();
 
     }
 }
