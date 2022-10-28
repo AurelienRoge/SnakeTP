@@ -1,6 +1,6 @@
 public class SnakeElement {
     int position;
-    String direction = "E";
+    String direction = "W";
 
     public SnakeElement(int position){
         this.position = position;
