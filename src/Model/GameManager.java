@@ -1,5 +1,8 @@
+package Model;
+
 //A FAIRE : FONCTION DE LOOP INFINIE QUI GERE TOUT (déplacement, affichage, spawn des fruits)
 //          SYSTEME DE CONTROLES
+
 public class GameManager {
     Snake snake;
     int mapSize;
@@ -13,7 +16,8 @@ public class GameManager {
         return snake;
     }
 
-    public void updateAndDisplayMap(){
+
+    public void displayMap(){
         int[] map = new int[mapSize*mapSize];
         //Initialisation du tableau : on remplit de 0
         for(int i = 0; i < mapSize*mapSize; i++){

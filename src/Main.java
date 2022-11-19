@@ -1,17 +1,32 @@
+import Model.*;
+
 public class Main {
 
     public static void main(String[] args) {
 
         //Des test
         GameManager game = new GameManager(10);
-        game.getSnake().displaySnakePositions();
-        game.updateAndDisplayMap();
-        game.getSnake().manageSnakePositionAndSize();
-        game.getSnake().displaySnakePositions();
+        System.out.println("\nAFFICHAGE DE LA CARTE");
+        game.displayMap();
+        game.getSnake().manageSnakePositionAndSize();//Déplacement du serpent
+        System.out.println("\nAFFICHAGE DE LA CARTE");
+        game.displayMap();
         game.getSnake().increaseSize(1);
-        game.getSnake().manageSnakePositionAndSize();
-        game.getSnake().displaySnakePositions();
-        game.updateAndDisplayMap();
+        game.getSnake().manageSnakePositionAndSize();//Déplacement du serpent
+        System.out.println("\nAFFICHAGE DE LA CARTE");
+        game.displayMap();
+        game.getSnake().manageSnakePositionAndSize();//Déplacement du serpent
+        System.out.println("\nAFFICHAGE DE LA CARTE");
+        game.displayMap();
+        game.getSnake().manageSnakePositionAndSize();//Déplacement du serpent
+        System.out.println("\nAFFICHAGE DE LA CARTE");
+        game.displayMap();
+        game.getSnake().manageSnakePositionAndSize();//Déplacement du serpent
+        System.out.println("\nAFFICHAGE DE LA CARTE");
+        game.displayMap();
+        game.getSnake().manageSnakePositionAndSize();//Déplacement du serpent
+        System.out.println("\nAFFICHAGE DE LA CARTE");
+        game.displayMap();
 
     }
 }

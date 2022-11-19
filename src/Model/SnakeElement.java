@@ -1,6 +1,9 @@
+package Model;
+
+
 public class SnakeElement {
     int position;
-    String direction = "W";
+    String direction = "Left";
 
     public SnakeElement(int position){
         this.position = position;
