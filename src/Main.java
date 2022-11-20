@@ -1,5 +1,7 @@
 import Model.*;
 
+import java.util.Random;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -27,6 +29,7 @@ public class Main {
         game.getSnake().manageSnakePositionAndSize();//Déplacement du serpent
         System.out.println("\nAFFICHAGE DE LA CARTE");
         game.displayMap();
+
 
     }
 }

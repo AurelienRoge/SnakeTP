@@ -6,16 +6,17 @@ package Model;
 public class GameManager {
     Snake snake;
     int mapSize;
+    FruitManager fruitManager = new FruitManager(mapSize);
 
     public GameManager(int mapSize){
         this.snake = new Snake(mapSize);
         this.mapSize = mapSize;
+        fruitManager.generateNewRandomFruit();
     }
 
     public Snake getSnake(){
         return snake;
     }
-
 
     public void displayMap(){
         int[] map = new int[mapSize*mapSize];
@@ -30,6 +31,10 @@ public class GameManager {
             map[snakePosition] = 1;
         }
 
+        //On récupère la position(valide) du fruit actuel et on ajoute un 2 à sa position
+        map[fruitManager.getCurrentFruit().getPosition()] = 2;
+
+
         //On affiche toute la carte
         for(int i = 0; i < mapSize*mapSize;i++){
             if(i % mapSize == 0){
@@ -38,4 +43,5 @@ public class GameManager {
             System.out.print(map[i]);
         }
     }
+
 }
