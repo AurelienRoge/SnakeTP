@@ -1,6 +1,1 @@
-# Project exclude paths
-/out/
-.idea/inspectionProfiles/Project_Default.xml
-.idea/misc.xml
-.idea/misc.xml
-.idea/misc.xml
+/bin/
