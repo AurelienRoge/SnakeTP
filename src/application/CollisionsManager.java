@@ -3,14 +3,23 @@ package application;
 
 public class CollisionsManager {
 	
-	int windowHeight;
-	int windowWidth;
+	private int windowHeight;
+	private int windowWidth;
+	
+	private static CollisionsManager instance;
 	Snake snake;
 	
-	public CollisionsManager(int windowHeight, int windowWidth, Snake snake) {
+	private CollisionsManager(int windowHeight, int windowWidth, Snake snake) {
 		this.windowHeight = windowHeight;
 		this.windowWidth = windowWidth;
 		this.snake = snake;
+	}
+	
+	public static CollisionsManager getCollisionsManager(int windowHeight, int windowWidth, Snake snake) {
+		if(instance == null) {
+			return new CollisionsManager(windowHeight, windowWidth, snake);
+		}
+		return instance;
 	}
 	
 	public void setSnake(Snake snake) {

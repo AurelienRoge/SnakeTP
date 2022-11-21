@@ -18,13 +18,13 @@ public class Game extends Application {
 	//variables
 	private static int width = 500;
 	private static int height = 500;
-	private static int Radius = 10;
+	private static int radius = 10;
 
 	private Pane root;
 	private Circle food;
 	private Random random;
 	private Snake snake;
-	private CollisionsManager collisionsManager = new CollisionsManager(height, width, snake);//Singleton gestionnaire de collisions
+	private CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,snake);//Singleton gestionnaire de collisions
 	
 	public static int getWindowWidth() {
 		return width;
@@ -36,14 +36,14 @@ public class Game extends Application {
 	
 	//on crée des cercles que le serpent devra manger pour grandir
 	private void newFood() {
-		food = new Circle(random.nextInt(width),random.nextInt(height),Radius);//creation de cercles à des positions randoms
+		food = new Circle(random.nextInt(width),random.nextInt(height),radius);//creation de cercles à des positions randoms
 		food.setFill(Color.RED); //on attribue la couleur rouge
 		root.getChildren().add(food); //on ajoute le cercle pour pouvoir l'afficher
 	}
 	
 	//On crée un nouveau serpent 
 	private void newSnake() {
-		snake = new Snake(width/2,height/2, Radius+1);//on positionne le serpent au milieu
+		snake = new Snake(width/2,height/2, radius+1);//on positionne le serpent au milieu
 		root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
 		snake.eat(food);
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
