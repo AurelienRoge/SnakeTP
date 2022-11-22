@@ -10,16 +10,18 @@ public class CollisionsManager {
 	
 	private static CollisionsManager instance;
 	Snake snake;
+
+	private final double radius;
 	
-	private CollisionsManager(int windowHeight, int windowWidth, Snake snake) {
+	private CollisionsManager(int windowHeight, int windowWidth, double radius) {
 		this.windowHeight = windowHeight;
 		this.windowWidth = windowWidth;
-		this.snake = snake;
+		this.radius = radius;
 	}
 	
-	public static CollisionsManager getCollisionsManager(int windowHeight, int windowWidth, Snake snake) {
+	public static CollisionsManager getCollisionsManager(int windowHeight, int windowWidth, double radius) {
 		if(instance == null) {
-			return new CollisionsManager(windowHeight, windowWidth, snake);
+			return new CollisionsManager(windowHeight, windowWidth, radius);
 		}
 		return instance;
 	}
@@ -54,12 +56,18 @@ public class CollisionsManager {
 		Circle head = snake.getSnakeHead();
 
 		//Modifier la méthode de détection parce que les cercles de bases sont emboités dans eux même
-		for(int i = 2; i < snake.getLength() - 1; i++){
-			if(head.getCenterX() == snake.getBody().get(i).getCenterX() && head.getCenterY() == snake.getBody().get(i).getCenterY()){
+		for(int i = 3; i < snake.getLength() - 1; i++){
+			if((head.getCenterX() >= snake.getBody().get(i).getCenterX() - radius*0.75
+					&& head.getCenterX() <= snake.getBody().get(i).getCenterX() + radius*0.75)
+					&&(head.getCenterY() >= snake.getBody().get(i).getCenterY() - radius*0.75
+					&& head.getCenterY() <= snake.getBody().get(i).getCenterY() + radius*0.75)){
+
+				System.out.println(i);
+
 				return true;
 			}
 		}
-		System.out.println("No collisions with itself");
+		System.out.println("No collision with itself");
 
 		return false;
 	}

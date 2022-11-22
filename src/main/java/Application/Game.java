@@ -24,7 +24,7 @@ public class Game extends Application {
 	private Circle food;
 	private Random random;
 	private Snake snake;
-	private final CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,snake);//Singleton gestionnaire de collisions
+	private final CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,radius);//Singleton gestionnaire de collisions
 	
 	public static int getWindowWidth() {
 		return width;
@@ -67,7 +67,7 @@ public class Game extends Application {
 			});
 		}
 		else {
-			System.out.println("Collision detected, can't move !");
+			//System.out.println("Collision detected, can't move !");
 		}
 	}
 	
