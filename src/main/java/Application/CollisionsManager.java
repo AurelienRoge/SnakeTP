@@ -1,10 +1,12 @@
 package Application;
 
 
+import javafx.scene.shape.Circle;
+
 public class CollisionsManager {
 	
-	private int windowHeight;
-	private int windowWidth;
+	private final int windowHeight;
+	private final int windowWidth;
 	
 	private static CollisionsManager instance;
 	Snake snake;
@@ -31,33 +33,35 @@ public class CollisionsManager {
 		if(snake != null) {
 			switch (snake.getDirection()) {
 		        case UP -> {
-		            if (snake.getSnakeHead().getCenterY() < 25) {
-		                return true;
-		            }
-		            return false;
-		        }
+					return snake.getSnakeHead().getCenterY() < 25;
+				}
 		        case DOWN -> {
-		            if (snake.getSnakeHead().getCenterY() >= windowHeight - 25) {
-		                return true;
-		            }
-		            return false;
-		        }
+					return snake.getSnakeHead().getCenterY() >= windowHeight - 25;
+				}
 		        case RIGHT -> {
-		            if (snake.getSnakeHead().getCenterX() > windowWidth - 25) {
-		                return true;
-		            }
-		            return false;
-		        }
+					return snake.getSnakeHead().getCenterX() > windowWidth - 25;
+				}
 		        case LEFT -> {
-		            if (snake.getSnakeHead().getCenterX() < 25) {
-		                return true;
-		            }
-		            return false;
-		        }
+					return snake.getSnakeHead().getCenterX() < 25;
+				}
 			}
 	    return false;
 		}
 	    return false;
+	}
+
+	public boolean detectSelfCollision(){
+		Circle head = snake.getSnakeHead();
+
+		//Modifier la méthode de détection parce que les cercles de bases sont emboités dans eux même
+		for(int i = 2; i < snake.getLength() - 1; i++){
+			if(head.getCenterX() == snake.getBody().get(i).getCenterX() && head.getCenterY() == snake.getBody().get(i).getCenterY()){
+				return true;
+			}
+		}
+		System.out.println("No collisions with itself");
+
+		return false;
 	}
 
 }

@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Snake extends Circle{
-	private List<Circle> tails;
+	private final List<Circle> body;
 	private int length = 0;
 	private Direction direction;
 	private static final int Step = 8;
@@ -15,7 +15,7 @@ public class Snake extends Circle{
 	
 	public Snake(double posX, double posY, double radius) {
 		super(posX, posY, radius);
-		tails = new ArrayList<>();
+		body = new ArrayList<>();
 		direction = Direction.UP;
 		this.setFill(Color.GREEN);
 	}
@@ -24,12 +24,12 @@ public class Snake extends Circle{
 	public void step() {
 		for(int i = length -1; i>=0;i--) {
 			if(i == 0) {//Tête du serpent
-				tails.get(i).setCenterX(getCenterX());
-				tails.get(i).setCenterY(getCenterY());
+				body.get(i).setCenterX(getCenterX());
+				body.get(i).setCenterY(getCenterY());
 			}
 			else {//Suite du corps
-				tails.get(i).setCenterX(tails.get(i-1).getCenterX());
-				tails.get(i).setCenterY(tails.get(i-1).getCenterY());
+				body.get(i).setCenterX(body.get(i-1).getCenterX());
+				body.get(i).setCenterY(body.get(i-1).getCenterY());
 			}
 		}
 		
@@ -51,25 +51,25 @@ public class Snake extends Circle{
 		return direction;
 	}
 	
-	public void setdirection(Direction direction) {
+	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
 	
-	//permet de connaitre sa endofTail
-	private Circle endofTail() {
+	//permet de connaitre le bout de sa queue
+	private Circle endOfTail() {
 		if(length == 0) {
 			return this;
 		}
-		return tails.get(length - 1);
+		return body.get(length - 1);
 	}
 	
 	//permet d'agrandir le serpent quand il mange un cercle
 	public void eat(Circle food) {
-		Circle tail = endofTail();
+		Circle tail = endOfTail();
 		food.setCenterX(tail.getCenterX());
 		food.setCenterY(tail.getCenterY());
 		food.setFill(Color.GREEN);
-		tails.add(length++,food);
+		body.add(length++,food);
 
 	}
 
@@ -80,6 +80,10 @@ public class Snake extends Circle{
 	}
 	
 	public Circle getSnakeHead() {
-		return tails.get(0);
+		return body.get(0);
+	}
+
+	public List<Circle> getBody() {
+		return body;
 	}
 }

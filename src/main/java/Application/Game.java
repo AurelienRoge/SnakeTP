@@ -16,15 +16,15 @@ import javafx.scene.layout.Pane;
 
 public class Game extends Application {
 	//variables
-	private static int width = 500;
-	private static int height = 500;
-	private static int radius = 10;
+	private static final int width = 500;
+	private static final int height = 500;
+	private static final int radius = 10;
 
 	private Pane root;
 	private Circle food;
 	private Random random;
 	private Snake snake;
-	private CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,snake);//Singleton gestionnaire de collisions
+	private final CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,snake);//Singleton gestionnaire de collisions
 	
 	public static int getWindowWidth() {
 		return width;
@@ -57,7 +57,7 @@ public class Game extends Application {
 	
 	//move
 	private void move() {
-		if(!collisionsManager.detectBorderCollisions()) {
+		if(!collisionsManager.detectBorderCollisions() && !collisionsManager.detectSelfCollision()) {
 			Platform.runLater(()->{
 				snake.step();
 				if(hit()) {
@@ -100,17 +100,17 @@ public class Game extends Application {
     	//controls
     	scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
     		KeyCode code = event.getCode();
-    		if(code == KeyCode.UP || code == KeyCode.Z) {
-    			snake.setdirection(Direction.UP);
+    		if(code == KeyCode.UP || code == KeyCode.Z && snake.getDirection() != Direction.DOWN) {
+    			snake.setDirection(Direction.UP);
     		}
-    		if(code == KeyCode.DOWN || code == KeyCode.S) {
-    			snake.setdirection(Direction.DOWN);
+    		if(code == KeyCode.DOWN || code == KeyCode.S && snake.getDirection() != Direction.UP) {
+    			snake.setDirection(Direction.DOWN);
     		}
-    		if(code == KeyCode.LEFT || code == KeyCode.Q) {
-    			snake.setdirection(Direction.LEFT);
+    		if(code == KeyCode.LEFT || code == KeyCode.Q && snake.getDirection() != Direction.RIGHT) {
+    			snake.setDirection(Direction.LEFT);
     		}
-    		if(code == KeyCode.RIGHT || code == KeyCode.D) {
-    			snake.setdirection(Direction.RIGHT);
+    		if(code == KeyCode.RIGHT || code == KeyCode.D && snake.getDirection() != Direction.LEFT) {
+    			snake.setDirection(Direction.RIGHT);
     		}
     	});
     	
