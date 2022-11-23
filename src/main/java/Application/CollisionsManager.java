@@ -1,4 +1,4 @@
-package main.java.Application;
+package Application;
 
 
 import javafx.scene.shape.Circle;
