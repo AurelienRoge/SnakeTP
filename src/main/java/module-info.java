@@ -1,4 +1,4 @@
-module com.example.SnakeTP {
+module Application {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -6,3 +6,4 @@ module com.example.SnakeTP {
     opens Application to javafx.fxml;
     exports Application;
 }
+//A MODIFIER ??
