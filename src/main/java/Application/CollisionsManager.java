@@ -55,12 +55,12 @@ public class CollisionsManager {
 	public boolean detectSelfCollision(){
 		Circle head = snake.getSnakeHead();
 
-		//Modifier la méthode de détection parce que les cercles de bases sont emboités dans eux même
+		//Système à améliorer pour plus de précision
 		for(int i = 3; i < snake.getLength() - 1; i++){
-			if((head.getCenterX() >= snake.getBody().get(i).getCenterX() - radius*0.75
-					&& head.getCenterX() <= snake.getBody().get(i).getCenterX() + radius*0.75)
-					&&(head.getCenterY() >= snake.getBody().get(i).getCenterY() - radius*0.75
-					&& head.getCenterY() <= snake.getBody().get(i).getCenterY() + radius*0.75)){
+			if((head.getCenterX() >= snake.getBody().get(i).getCenterX() - radius*0.79
+					&& head.getCenterX() <= snake.getBody().get(i).getCenterX() + radius*0.79)
+					&&(head.getCenterY() >= snake.getBody().get(i).getCenterY() - radius*0.79
+					&& head.getCenterY() <= snake.getBody().get(i).getCenterY() + radius*0.79)){
 
 				System.out.println(i);
 
