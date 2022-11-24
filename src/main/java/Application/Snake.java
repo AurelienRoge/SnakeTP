@@ -68,7 +68,13 @@ public class Snake extends Circle{
 		Circle tail = endOfTail();
 		food.setCenterX(tail.getCenterX());
 		food.setCenterY(tail.getCenterY());
-		food.setFill(Color.GREEN);
+		if(length % 4 < 2){
+			food.setFill(Color.GREEN);
+		}
+		else{
+			food.setFill(Color.LIGHTGREEN);
+		}
+
 		body.add(length++,food);
 
 	}

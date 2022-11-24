@@ -67,8 +67,6 @@ public class CollisionsManager {
 				return true;
 			}
 		}
-		System.out.println("No collision with itself");
-
 		return false;
 	}
 

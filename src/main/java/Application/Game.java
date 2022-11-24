@@ -10,6 +10,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 
@@ -24,8 +26,12 @@ public class Game extends Application {
 	private Circle food;
 	private Random random;
 	private Snake snake;
+	private Scene scene;
 	private final CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,radius);//Singleton gestionnaire de collisions
-	
+
+
+
+
 	public static int getWindowWidth() {
 		return width;
 	}
@@ -45,7 +51,7 @@ public class Game extends Application {
 	private void newSnake() {
 		snake = new Snake(width/2,height/2, radius+1);//on positionne le serpent au milieu
 		root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
-		snake.eat(food);
+		snake.eat(food);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 		
 	}
@@ -67,8 +73,49 @@ public class Game extends Application {
 			});
 		}
 		else {
-			//System.out.println("Collision detected, can't move !");
+			restartGame();
 		}
+	}
+
+
+	private void restartGame(){
+		Platform.runLater(()->{
+			root.getChildren().clear();//On supprime tout les éléments graphiques
+
+		});
+
+
+		/*Text gameOverText = new Text(20,250,"Game over, press the spacebar to start a new game");
+		gameOverText.setFont(Font.font("Arial", 20));
+
+
+		Platform.runLater(()->{
+			root.getChildren().add(gameOverText);
+		});
+
+		scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+			KeyCode code = event.getCode();
+			if(code == KeyCode.SPACE) {
+				//relancer le jeu
+			}
+		});*/
+
+
+
+		food = new Circle(random.nextInt(width),random.nextInt(height),radius);//creation de cercles à des positions randoms
+		food.setFill(Color.RED); //on attribue la couleur rouge
+
+		Platform.runLater(()->{
+			root.getChildren().add(food); //on ajoute le cercle pour pouvoir l'afficher.
+		});
+
+		snake = new Snake(width/2,height/2, radius+1);//on positionne le serpent au milieu
+
+		Platform.runLater(()->{
+			root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
+		});
+		snake.eat(food);//On augmente sa taille de 1
+		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 	}
 	
 	
@@ -95,7 +142,7 @@ public class Game extends Application {
     		
     	};
     	
-    	Scene scene = new Scene(root);
+    	scene = new Scene(root);
     	scene.setFill(Color.LIGHTGREY);
     	//controls
     	scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
