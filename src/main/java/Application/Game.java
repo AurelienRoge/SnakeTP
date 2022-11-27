@@ -18,9 +18,9 @@ import javafx.scene.layout.Pane;
 
 public class Game extends Application {
 	//variables
-	private static final int width = 500;
-	private static final int height = 500;
-	private static final int radius = 10;
+	private static final int width = 400;
+	private static final int height = 400;
+	private static final int radius = 12;
 
 	private Pane root;
 	private Circle food;
@@ -28,6 +28,7 @@ public class Game extends Application {
 	private Snake snake;
 	private Scene scene;
 	private final CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,radius);//Singleton gestionnaire de collisions
+	private final FruitManager fruitManager = FruitManager.getFruitManager();//Singleton gestionnaire des fruits
 
 
 
@@ -39,11 +40,16 @@ public class Game extends Application {
 	public static int getWindowHeight() {
 		return height;
 	}
+
+	public static int getRadius(){return  radius;}
+
+	public Pane getRoot(){return root;}
 	
 	//on crée des cercles que le serpent devra manger pour grandir
 	private void newFood() {
+		fruitManager.generateNewFruit();
 		food = new Circle(random.nextInt(width),random.nextInt(height),radius);//creation de cercles à des positions randoms
-		food.setFill(Color.RED); //on attribue la couleur rouge
+		food.setFill(fruitManager.getFruitColor()); //on attribue la couleur du fruit actuel
 		root.getChildren().add(food); //on ajoute le cercle pour pouvoir l'afficher
 	}
 	
@@ -51,7 +57,7 @@ public class Game extends Application {
 	private void newSnake() {
 		snake = new Snake(width/2,height/2, radius+1);//on positionne le serpent au milieu
 		root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
-		snake.eat(food);//On augmente sa taille de 1
+		snake.eat(food,"Apple", root);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 		
 	}
@@ -67,7 +73,7 @@ public class Game extends Application {
 			Platform.runLater(()->{
 				snake.step();
 				if(hit()) {
-					snake.eat(food);//on fait disparaitre le cercle et on augmente la taille du serpent de 1
+					snake.eat(food, fruitManager.getCurrentFruit(), root);//on fait disparaitre le cercle et on augmente la taille du serpent de 1
 					newFood();//on génère un nouveau cercle
 				}
 			});
@@ -114,7 +120,7 @@ public class Game extends Application {
 		Platform.runLater(()->{
 			root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
 		});
-		snake.eat(food);//On augmente sa taille de 1
+		snake.eat(food, "Apple", root);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 	}
 	
@@ -134,7 +140,7 @@ public class Game extends Application {
     		try {
     			for(;;) { 
         			move();
-        			Thread.sleep(50);//thread qui permet de modifier la vitesse du jeu
+        			Thread.sleep(40);//thread qui permet de modifier la vitesse du jeu
         		}
     		}catch (InterruptedException ie) {
     			

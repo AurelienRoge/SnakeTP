@@ -57,10 +57,10 @@ public class CollisionsManager {
 
 		//Système à améliorer pour plus de précision
 		for(int i = 3; i < snake.getLength() - 1; i++){
-			if((head.getCenterX() >= snake.getBody().get(i).getCenterX() - radius*0.79
-					&& head.getCenterX() <= snake.getBody().get(i).getCenterX() + radius*0.79)
-					&&(head.getCenterY() >= snake.getBody().get(i).getCenterY() - radius*0.79
-					&& head.getCenterY() <= snake.getBody().get(i).getCenterY() + radius*0.79)){
+			if((head.getCenterX() >= snake.getBody().get(i).getCenterX() - radius*0.70
+					&& head.getCenterX() <= snake.getBody().get(i).getCenterX() + radius*0.70)
+					&&(head.getCenterY() >= snake.getBody().get(i).getCenterY() - radius*0.70
+					&& head.getCenterY() <= snake.getBody().get(i).getCenterY() + radius*0.70)){
 
 				System.out.println(i);
 

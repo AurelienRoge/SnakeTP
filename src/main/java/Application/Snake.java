@@ -3,6 +3,7 @@ package Application;
 import java.util.List;
 import java.util.ArrayList;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -10,7 +11,7 @@ public class Snake extends Circle{
 	private final List<Circle> body;
 	private int length = 0;
 	private Direction direction;
-	private static final int Step = 8;
+	private static final int Step = 5;
 
 	
 	public Snake(double posX, double posY, double radius) {
@@ -34,16 +35,16 @@ public class Snake extends Circle{
 		}
 		
 		if(direction == Direction.UP) {
-			setCenterY(getCenterY()-Step);
+			setCenterY(getCenterY()-2*Step);
 		}
 		if(direction == Direction.DOWN) {
-			setCenterY(getCenterY()+Step);
+			setCenterY(getCenterY()+2*Step);
 		}
 		if(direction == Direction.LEFT) {
-			setCenterX(getCenterX()-Step);
+			setCenterX(getCenterX()-2*Step);
 		}
 		if(direction == Direction.RIGHT) {
-			setCenterX(getCenterX()+Step);
+			setCenterX(getCenterX()+2*Step);
 		}
 	}
 	
@@ -63,19 +64,43 @@ public class Snake extends Circle{
 		return body.get(length - 1);
 	}
 	
-	//permet d'agrandir le serpent quand il mange un cercle
-	public void eat(Circle food) {
+	//permet de modifier le serpent quand il mange un cercle
+	public void eat(Circle food, String fruitEaten, Pane root) {
 		Circle tail = endOfTail();
-		food.setCenterX(tail.getCenterX());
-		food.setCenterY(tail.getCenterY());
-		if(length % 4 < 2){
-			food.setFill(Color.GREEN);
-		}
-		else{
-			food.setFill(Color.LIGHTGREEN);
+		switch(fruitEaten){
+			case "Apple":
+				tail = endOfTail();
+				food.setCenterX(tail.getCenterX());
+				food.setCenterY(tail.getCenterY());
+
+				//Systeme serpent bicolore
+				if(length % 4 < 2){
+					food.setFill(Color.GREEN);
+				}
+				else{
+					food.setFill(Color.LIGHTGREEN);
+				}
+
+				body.add(length++,food);
+				break;
+
+			case "Blueberry":
+				root.getChildren().remove(food);
+				if(length > 3){
+					root.getChildren().remove(endOfTail());
+					body.remove(--length);//On retire le dernier cercle
+
+				}
+				break;
+
+			case "Orange":
+				root.getChildren().remove(food);
+
+				//SYSTEME DE SCORE
+				break;
 		}
 
-		body.add(length++,food);
+
 
 	}
 
