@@ -1,5 +1,4 @@
 # SnakeTP
-TP Java CIR3 S1
 
 Snake amélioré - Projet de fin de semestre 1 de CIR3 - Par Aurélien ROGÉ et Guillaume LEROY
 
