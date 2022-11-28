@@ -7,5 +7,5 @@ Récupérer le code source du jeu, vérifier que l’on a bien défini le chemin
 options de l’IDE, puis compiler. (nous avons utilisé le SDK Oracle OpenJDK version 19.0.1, mais
 cela ne devrait rien changer si vous en utilisez un autre)
 
-#Les contrôles
+# Les contrôles
 ZQSD ou les flèches directionnelles
