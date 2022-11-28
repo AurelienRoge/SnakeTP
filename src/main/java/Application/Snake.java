@@ -2,7 +2,6 @@ package Application;
 
 import java.util.List;
 import java.util.ArrayList;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -65,7 +64,7 @@ public class Snake extends Circle{
 	}
 	
 	//permet de modifier le serpent quand il mange un cercle
-	public void eat(Circle food, String fruitEaten, Pane root) {
+	public void eat(Circle food, String fruitEaten, Pane root, ScoreManager scoreManager) {
 		Circle tail = endOfTail();
 		switch(fruitEaten){
 			case "Apple":
@@ -82,26 +81,42 @@ public class Snake extends Circle{
 				}
 
 				body.add(length++,food);
+				scoreManager.increaseScore(5);
 				break;
 
 			case "Blueberry":
+				System.out.println(length);
 				root.getChildren().remove(food);
 				if(length > 3){
 					root.getChildren().remove(endOfTail());
 					body.remove(--length);//On retire le dernier cercle
 
 				}
+				scoreManager.increaseScore(3);
 				break;
 
 			case "Orange":
 				root.getChildren().remove(food);
 
-				//SYSTEME DE SCORE
+				scoreManager.increaseScore(15);
 				break;
 		}
+	}
 
+	public void initializeSnake(){
+		/*tail = endOfTail();
+		food.setCenterX(tail.getCenterX());
+		food.setCenterY(tail.getCenterY());
 
+		//Systeme serpent bicolore
+		if(length % 4 < 2){
+			food.setFill(Color.GREEN);
+		}
+		else{
+			food.setFill(Color.LIGHTGREEN);
+		}
 
+		body.add(length++,food);*/
 	}
 
 

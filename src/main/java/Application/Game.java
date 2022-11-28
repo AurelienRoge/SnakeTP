@@ -27,23 +27,13 @@ public class Game extends Application {
 	private Random random;
 	private Snake snake;
 	private Scene scene;
+
+	private Text scoreText;
+	private Text bestScoreText;
 	private final CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,radius);//Singleton gestionnaire de collisions
 	private final FruitManager fruitManager = FruitManager.getFruitManager();//Singleton gestionnaire des fruits
 
-
-
-
-	public static int getWindowWidth() {
-		return width;
-	}
-	
-	public static int getWindowHeight() {
-		return height;
-	}
-
-	public static int getRadius(){return  radius;}
-
-	public Pane getRoot(){return root;}
+	private final ScoreManager scoreManager = ScoreManager.getScoreManager();
 	
 	//on crée des cercles que le serpent devra manger pour grandir
 	private void newFood() {
@@ -57,7 +47,7 @@ public class Game extends Application {
 	private void newSnake() {
 		snake = new Snake(width/2,height/2, radius+1);//on positionne le serpent au milieu
 		root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
-		snake.eat(food,"Apple", root);//On augmente sa taille de 1
+		snake.eat(food,"Apple", root, scoreManager);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 		
 	}
@@ -73,10 +63,11 @@ public class Game extends Application {
 			Platform.runLater(()->{
 				snake.step();
 				if(hit()) {
-					snake.eat(food, fruitManager.getCurrentFruit(), root);//on fait disparaitre le cercle et on augmente la taille du serpent de 1
+					snake.eat(food, fruitManager.getCurrentFruit(), root, scoreManager);//on fait disparaitre le cercle et on augmente la taille du serpent de 1
 					newFood();//on génère un nouveau cercle
 				}
 			});
+			displayScore();
 		}
 		else {
 			restartGame();
@@ -86,27 +77,9 @@ public class Game extends Application {
 
 	private void restartGame(){
 		Platform.runLater(()->{
-			root.getChildren().clear();//On supprime tout les éléments graphiques
+			root.getChildren().clear();//On supprime tous les éléments graphiques
 
 		});
-
-
-		/*Text gameOverText = new Text(20,250,"Game over, press the spacebar to start a new game");
-		gameOverText.setFont(Font.font("Arial", 20));
-
-
-		Platform.runLater(()->{
-			root.getChildren().add(gameOverText);
-		});
-
-		scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-			KeyCode code = event.getCode();
-			if(code == KeyCode.SPACE) {
-				//relancer le jeu
-			}
-		});*/
-
-
 
 		food = new Circle(random.nextInt(width),random.nextInt(height),radius);//creation de cercles à des positions randoms
 		food.setFill(Color.RED); //on attribue la couleur rouge
@@ -120,8 +93,42 @@ public class Game extends Application {
 		Platform.runLater(()->{
 			root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
 		});
-		snake.eat(food, "Apple", root);//On augmente sa taille de 1
+		snake.eat(food, "Apple", root, scoreManager);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
+
+		scoreManager.resetScoreValue();//Reset le score
+	}
+
+	private void displayScore(){
+
+		Text textToDelete = scoreText;
+		Text textToDelete2 = bestScoreText;
+		Platform.runLater(()->{
+			if(textToDelete != null){
+				root.getChildren().remove(textToDelete);
+			}
+			if(textToDelete2 != null){
+				root.getChildren().remove(textToDelete2);
+			}
+		});
+
+
+		scoreText = new Text(5,20,"Score:" + scoreManager.getScoreValue());
+		scoreText.setFont(Font.font("Arial", 17));
+
+		bestScoreText = new Text(5,40,"Best:" + scoreManager.getBestScore());
+		bestScoreText.setFont(Font.font("Arial", 17));
+
+		Platform.runLater(()->{
+			if(!root.getChildren().contains(scoreText)){
+				root.getChildren().add(scoreText);
+			}
+			if(!root.getChildren().contains(bestScoreText)){
+				root.getChildren().add(bestScoreText);
+			}
+		});
+
+
 	}
 	
 	
@@ -138,7 +145,7 @@ public class Game extends Application {
     	//on crée un thread
     	Runnable r = ()->{
     		try {
-    			for(;;) { 
+    			for(;;) {
         			move();
         			Thread.sleep(40);//thread qui permet de modifier la vitesse du jeu
         		}

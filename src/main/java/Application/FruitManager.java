@@ -1,7 +1,6 @@
 package Application;
 
 import javafx.scene.paint.Color;
-
 import java.util.Random;
 
 public class FruitManager {
@@ -23,10 +22,10 @@ public class FruitManager {
 
 
     public void generateNewFruit(){
-        int tmprand = random.nextInt(101);
-        if(tmprand < 60){
+        int tmpRand = random.nextInt(101);
+        if(tmpRand < 60){
             currentFruit = "Apple";
-        } else if (tmprand >= 90) {
+        } else if (tmpRand >= 90) {
             currentFruit = "Blueberry";
         }
         else{
