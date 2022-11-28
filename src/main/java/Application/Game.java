@@ -4,6 +4,8 @@ package Application;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+
+import java.io.File;
 import java.util.Random;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -32,9 +34,13 @@ public class Game extends Application {
 	private Text bestScoreText;
 	private final CollisionsManager collisionsManager = CollisionsManager.getCollisionsManager(height,width,radius);//Singleton gestionnaire de collisions
 	private final FruitManager fruitManager = FruitManager.getFruitManager();//Singleton gestionnaire des fruits
-
 	private final ScoreManager scoreManager = ScoreManager.getScoreManager();
-	
+	private final FileManager fileManager = FileManager.getFileManager();
+
+
+	public int getRadius(){
+		return radius;
+	}
 	//on crée des cercles que le serpent devra manger pour grandir
 	private void newFood() {
 		fruitManager.generateNewFruit();
@@ -47,7 +53,7 @@ public class Game extends Application {
 	private void newSnake() {
 		snake = new Snake(width/2,height/2, radius+1);//on positionne le serpent au milieu
 		root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
-		snake.eat(food,"Apple", root, scoreManager);//On augmente sa taille de 1
+		snake.initializeSnake(this);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 		
 	}
@@ -93,10 +99,12 @@ public class Game extends Application {
 		Platform.runLater(()->{
 			root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
 		});
-		snake.eat(food, "Apple", root, scoreManager);//On augmente sa taille de 1
+		snake.initializeSnake(this);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 
+
 		scoreManager.resetScoreValue();//Reset le score
+
 	}
 
 	private void displayScore(){
@@ -127,8 +135,6 @@ public class Game extends Application {
 				root.getChildren().add(bestScoreText);
 			}
 		});
-
-
 	}
 	
 	
@@ -138,6 +144,7 @@ public class Game extends Application {
     	root = new Pane();
     	root.setPrefSize(width, height);
     	random = new Random();
+		fileManager.createFile();
     	
     	
     	newFood();

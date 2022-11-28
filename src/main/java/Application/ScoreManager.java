@@ -10,12 +10,13 @@ public class ScoreManager {
     private int bestScore = 0;
 
     private ScoreManager(){
-
+        bestScore = FileManager.readFile();
+        System.out.println("bestScore" + bestScore);
     }
 
     public static ScoreManager getScoreManager(){
         if(instance == null){
-            return new ScoreManager();
+            instance = new ScoreManager();
         }
         return instance;
     }
@@ -23,10 +24,6 @@ public class ScoreManager {
 
     public void increaseScore(int value){
         score += value;
-    }
-
-    public void incrementScore(){
-        score++;
     }
 
     public int getScoreValue(){
@@ -40,6 +37,7 @@ public class ScoreManager {
     public void resetScoreValue(){
         if(score > bestScore){
             bestScore = score;
+            FileManager.writeToFile(String.valueOf(score));
         }
         score = 0;
     }

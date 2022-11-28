@@ -11,7 +11,7 @@ public class FruitManager {
 
     public static FruitManager getFruitManager() {
         if(instance == null) {
-            return new FruitManager();
+            instance = new FruitManager();
         }
         return instance;
     }

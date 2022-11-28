@@ -103,20 +103,21 @@ public class Snake extends Circle{
 		}
 	}
 
-	public void initializeSnake(){
-		/*tail = endOfTail();
-		food.setCenterX(tail.getCenterX());
-		food.setCenterY(tail.getCenterY());
+	//A FINIR (je pense que c'est le paramètre qui fait bug, à tester, ou alors je n'ajoute pas au root)
+	public void initializeSnake(Game game){
+		Circle tail = endOfTail();
+
+		Circle firstCircle = new Circle(tail.getCenterX(),tail.getCenterY(), game.getRadius());//creation du cercle
 
 		//Systeme serpent bicolore
 		if(length % 4 < 2){
-			food.setFill(Color.GREEN);
+			firstCircle.setFill(Color.GREEN);
 		}
 		else{
-			food.setFill(Color.LIGHTGREEN);
+			firstCircle.setFill(Color.LIGHTGREEN);
 		}
 
-		body.add(length++,food);*/
+		body.add(length++,firstCircle);
 	}
 
 

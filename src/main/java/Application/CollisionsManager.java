@@ -4,7 +4,6 @@ package Application;
 import javafx.scene.shape.Circle;
 
 public class CollisionsManager {
-	
 	private final int windowHeight;
 	private final int windowWidth;
 	
@@ -21,7 +20,7 @@ public class CollisionsManager {
 	
 	public static CollisionsManager getCollisionsManager(int windowHeight, int windowWidth, double radius) {
 		if(instance == null) {
-			return new CollisionsManager(windowHeight, windowWidth, radius);
+			instance = new CollisionsManager(windowHeight, windowWidth, radius);
 		}
 		return instance;
 	}
