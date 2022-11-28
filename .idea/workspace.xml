@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95925030-9c04-4743-b73a-12f55d11bc53" name="Changes" comment="Systeme de fruit amélioré">
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+    <list default="true" id="95925030-9c04-4743-b73a-12f55d11bc53" name="Changes" comment="Final version">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SnakeTP/Application/CollisionsManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SnakeTP/Application/CollisionsManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SnakeTP/Application/Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SnakeTP/Application/FruitManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SnakeTP/Application/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeTP/Application/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SnakeTP/Application/Snake.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SnakeTP/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeTP/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/CollisionsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/System/GameMechanics/CollisionsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/System/GameMechanics/Direction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/System/ScoreAndFile/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/FruitManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/System/GameMechanics/FruitManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/ScoreManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/System/ScoreAndFile/ScoreManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/System/GameMechanics/Snake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +74,7 @@
       <workItem from="1669298389027" duration="8918000" />
       <workItem from="1669566468852" duration="5686000" />
       <workItem from="1669587473841" duration="109000" />
-      <workItem from="1669655126796" duration="2229000" />
+      <workItem from="1669655126796" duration="2562000" />
     </task>
     <task id="LOCAL-00001" summary="Serpent bicolore + restart game">
       <created>1669311880836</created>
@@ -112,7 +97,28 @@
       <option name="project" value="LOCAL" />
       <updated>1669587501782</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Final version">
+      <created>1669657418938</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669657418938</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Final version">
+      <created>1669657619390</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1669657619390</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Final version">
+      <created>1669657635211</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1669657635211</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,7 +138,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Serpent bicolore + restart game" />
     <MESSAGE value="Systeme de fruit amélioré" />
-    <option name="LAST_COMMIT_MESSAGE" value="Systeme de fruit amélioré" />
+    <MESSAGE value="Final version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final version" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
