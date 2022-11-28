@@ -1,7 +1,11 @@
-package Application;
+package Application.System.GameMechanics;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import Application.Game;
+import Application.System.ScoreAndFile.ScoreManager;
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -46,15 +50,7 @@ public class Snake extends Circle{
 			setCenterX(getCenterX()+2*Step);
 		}
 	}
-	
-	public Direction getDirection () {
-		return direction;
-	}
-	
-	public void setDirection(Direction direction) {
-		this.direction = direction;
-	}
-	
+
 	//permet de connaitre le bout de sa queue
 	private Circle endOfTail() {
 		if(length == 0) {
@@ -66,48 +62,45 @@ public class Snake extends Circle{
 	//permet de modifier le serpent quand il mange un cercle
 	public void eat(Circle food, String fruitEaten, Pane root, ScoreManager scoreManager) {
 		Circle tail = endOfTail();
-		switch(fruitEaten){
-			case "Apple":
+		switch (fruitEaten) {
+			case "Apple" -> {
 				tail = endOfTail();
 				food.setCenterX(tail.getCenterX());
 				food.setCenterY(tail.getCenterY());
 
 				//Systeme serpent bicolore
-				if(length % 4 < 2){
+				if (length % 4 < 2) {
 					food.setFill(Color.GREEN);
-				}
-				else{
+				} else {
 					food.setFill(Color.LIGHTGREEN);
 				}
-
-				body.add(length++,food);
+				body.add(length++, food);
 				scoreManager.increaseScore(5);
-				break;
-
-			case "Blueberry":
-				System.out.println(length);
+			}
+			case "Blueberry" -> {
 				root.getChildren().remove(food);
-				if(length > 3){
+				if (length > 3) {
 					root.getChildren().remove(endOfTail());
 					body.remove(--length);//On retire le dernier cercle
 
 				}
 				scoreManager.increaseScore(3);
-				break;
-
-			case "Orange":
+			}
+			case "Orange" -> {
 				root.getChildren().remove(food);
-
 				scoreManager.increaseScore(15);
-				break;
+			}
 		}
 	}
 
-	//A FINIR (je pense que c'est le paramètre qui fait bug, à tester, ou alors je n'ajoute pas au root)
-	public void initializeSnake(Game game){
+	//Initialisation du serpent : on lui ajoute un deuxieme cercle représentant le début de son corps
+	public void initializeSnake(Game game, Pane root){
 		Circle tail = endOfTail();
 
 		Circle firstCircle = new Circle(tail.getCenterX(),tail.getCenterY(), game.getRadius());//creation du cercle
+		Platform.runLater(()->{
+			root.getChildren().add(firstCircle); //on ajoute le cercle pour pouvoir l'afficher
+		});
 
 		//Systeme serpent bicolore
 		if(length % 4 < 2){
@@ -120,6 +113,14 @@ public class Snake extends Circle{
 		body.add(length++,firstCircle);
 	}
 
+
+	public Direction getDirection () {
+		return direction;
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
 
 	public int getLength() {
 

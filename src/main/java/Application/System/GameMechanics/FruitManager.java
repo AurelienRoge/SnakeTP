@@ -1,4 +1,4 @@
-package Application;
+package Application.System.GameMechanics;
 
 import javafx.scene.paint.Color;
 import java.util.Random;
@@ -23,9 +23,9 @@ public class FruitManager {
 
     public void generateNewFruit(){
         int tmpRand = random.nextInt(101);
-        if(tmpRand < 60){
+        if(tmpRand < 75){
             currentFruit = "Apple";
-        } else if (tmpRand >= 90) {
+        } else if (tmpRand >= 92) {
             currentFruit = "Blueberry";
         }
         else{
@@ -34,15 +34,12 @@ public class FruitManager {
     }
 
     public Color getFruitColor(){
-        switch (currentFruit){
-            case "Apple":
-                return Color.RED;
-            case "Blueberry":
-                return Color.BLUE;
-            case "Orange":
-                return Color.ORANGE;
-        }
-        return Color.BLACK;//Si erreur
+        return switch (currentFruit) {
+            case "Apple" -> Color.RED;
+            case "Blueberry" -> Color.BLUE;
+            case "Orange" -> Color.ORANGE;
+            default -> Color.BLACK;
+        };
     }
 
     public String getCurrentFruit(){

@@ -2,10 +2,14 @@ package Application;
 
 
 
+import Application.System.GameMechanics.CollisionsManager;
+import Application.System.GameMechanics.Direction;
+import Application.System.GameMechanics.FruitManager;
+import Application.System.GameMechanics.Snake;
+import Application.System.ScoreAndFile.FileManager;
+import Application.System.ScoreAndFile.ScoreManager;
 import javafx.application.Application;
 import javafx.application.Platform;
-
-import java.io.File;
 import java.util.Random;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -28,7 +32,6 @@ public class Game extends Application {
 	private Circle food;
 	private Random random;
 	private Snake snake;
-	private Scene scene;
 
 	private Text scoreText;
 	private Text bestScoreText;
@@ -41,6 +44,7 @@ public class Game extends Application {
 	public int getRadius(){
 		return radius;
 	}
+
 	//on crée des cercles que le serpent devra manger pour grandir
 	private void newFood() {
 		fruitManager.generateNewFruit();
@@ -53,7 +57,7 @@ public class Game extends Application {
 	private void newSnake() {
 		snake = new Snake(width/2,height/2, radius+1);//on positionne le serpent au milieu
 		root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
-		snake.initializeSnake(this);//On augmente sa taille de 1
+		snake.initializeSnake(this, root);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 		
 	}
@@ -63,7 +67,7 @@ public class Game extends Application {
 		return food.intersects(snake.getBoundsInLocal());
 	}
 	
-	//move
+	//Déplacement + gestion de la mort
 	private void move() {
 		if(!collisionsManager.detectBorderCollisions() && !collisionsManager.detectSelfCollision()) {
 			Platform.runLater(()->{
@@ -99,7 +103,7 @@ public class Game extends Application {
 		Platform.runLater(()->{
 			root.getChildren().add(snake);//on ajoute le serpent pour pouvoir l'afficher
 		});
-		snake.initializeSnake(this);//On augmente sa taille de 1
+		snake.initializeSnake(this, root);//On augmente sa taille de 1
 		collisionsManager.setSnake(snake);//On met à jour le serpent dans le gestionnaire de collisions
 
 
@@ -144,6 +148,7 @@ public class Game extends Application {
     	root = new Pane();
     	root.setPrefSize(width, height);
     	random = new Random();
+
 		fileManager.createFile();
     	
     	
@@ -161,8 +166,8 @@ public class Game extends Application {
     		}
     		
     	};
-    	
-    	scene = new Scene(root);
+
+		Scene scene = new Scene(root);
     	scene.setFill(Color.LIGHTGREY);
     	//controls
     	scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {

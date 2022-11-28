@@ -1,4 +1,4 @@
-package Application;
+package Application.System.GameMechanics;
 
 
 import javafx.scene.shape.Circle;

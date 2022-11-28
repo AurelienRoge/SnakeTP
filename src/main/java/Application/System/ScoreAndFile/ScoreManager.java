@@ -1,7 +1,4 @@
-package Application;
-
-
-import javafx.scene.text.Text;
+package Application.System.ScoreAndFile;
 
 //Singleton gestionnaire du système de score
 public class ScoreManager {

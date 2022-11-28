@@ -1,4 +1,4 @@
-package Application;
+package Application.System.ScoreAndFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,14 +25,14 @@ public class FileManager {
 
     public void createFile(){
         try {
-            File myObj = new File("snakeData.txt");
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
+            File snakeDataFile = new File("snakeData.txt");
+            if (snakeDataFile.createNewFile()) {
+                System.out.println("Fichier créé: " + snakeDataFile.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("Le fichier existe déjà");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Il y a eu une erreur");
             e.printStackTrace();
         }
     }
@@ -44,28 +44,27 @@ public class FileManager {
             FileWriter myWriter = new FileWriter("snakeData.txt");
             myWriter.write(toWrite);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("Écriture dans le fichier réussie");
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Il y a eu une erreur");
             e.printStackTrace();
         }
     }
 
     public static int readFile(){
         try {
-            File myObj = new File("snakeData.txt");
-            Scanner myReader = new Scanner(myObj);
-            if (myReader.hasNextLine()) {
+            File snakeDataFile = new File("snakeData.txt");
+            Scanner myReader = new Scanner(snakeDataFile);
+            if (myReader.hasNextLine()) {//On lit la première ligne
                 int data = Integer.parseInt(myReader.nextLine());
                 System.out.println(data);
                 return data;
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Il y a eu une erreur");
             e.printStackTrace();
         }
-        return 0;
+        return 0;//Si on arrive pas à lire, on retourne 0;
     }
-
 }
